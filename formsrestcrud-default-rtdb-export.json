@@ -5,7 +5,7 @@
       "name": "",
       "creature": "",
       "size": "",
-      "hitpoints": "",
+      "hitPoints": "",
       "stats": { "str": 0, "dex": 0, "con": 0, "int": 0 },
       "attack": "",
       "armor": 0,

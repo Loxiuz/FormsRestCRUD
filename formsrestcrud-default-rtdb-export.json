@@ -1,10 +1,15 @@
 {
   "monsters": {
     "1mNVXMNbZWjKsiaTFsDw": {
-      "Characteristics": "Shapeshifting",
-      "image": "https://c1.wallpaperflare.com/preview/872/944/844/werewolf-art-full-moon-wolf.jpg",
-      "placeOfOrigin": "Greece",
-      "type": "Werewolf"
+      "image": "",
+      "name": "",
+      "creature": "",
+      "size": "",
+      "hitpoints": "",
+      "stats": { "str": 0, "dex": 0, "con": 0, "int": 0 },
+      "attack": "",
+      "armor": 0,
+      "level": 0
     }
   }
 }

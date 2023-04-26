@@ -110,7 +110,7 @@ function showPosts(posts) {
   }
   posts.forEach(showPost);
 }
-/* ------- Update post ------- */
+/* ------------------UPDATE FORM SECTION----------------- */
 function updateBtnClicked(post) {
   console.log("Update button clicked");
   const updateForm = document.querySelector("#update-form");

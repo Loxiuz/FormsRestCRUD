@@ -8,73 +8,48 @@ const endpoint =
 async function start() {
   updatePostsGrid();
 
-  document.querySelector("#create_btn").addEventListener("click", () => {
-    const stats = { str: 0, dex: 0, con: 0, int: 0 };
-    createPost("", "", "", "", "", stats, "", 0, 0);
-  });
+  //---------------- Event listeners ----------------
+  document
+    .querySelector("#create_btn")
+    .addEventListener("click", createBtnClick);
+  document
+    .querySelector("#creation-form")
+    .addEventListener("submit", createPost);
 }
 
-function showCreateDialog() {}
+//------------------CREATE FORM SECTION-----------------
 
-async function submitCreate() {}
-
-function showUpdateDialog() {}
-
-async function getPosts() {
-  const response = await fetch(`${endpoint}/monsters.json`);
-  const data = await response.json();
-  return prepareData(data);
+//Create button click (show create dialog with form)
+function createBtnClick() {
+  console.log("Create button clicked!");
+  document.querySelector("#creation-dialog").showModal();
 }
 
-function showPosts(posts) {
-  console.log("Show posts");
-  //Deletes content in table before adding new content to make sure it updates correctly
-  document.querySelector(".post-grid").innerHTML = "";
-  //Shows data in html
-  function showPost(post) {
-    const htmlPostData = /*html*/ `
-          <div class="post-item">
-            <div><image src=${post.image}></>
-            <div id="post_name">Name: ${post.name}</div>
-            <div id="post_creature">Creature: ${post.creature}</div>
-            <div>Size: ${post.size}</div>
-            <div>Hitpoints: ${post.hitpoints}</div>
-            <div>Stats: ${JSON.stringify(post.stats)}</div>
-            <div>Attack: ${post.attack}</div>
-            <div>Armor: ${post.armor}</div>
-            <div>Level: ${post.level}</div>
-            
-          </div>
-          `;
-    document
-      .querySelector(".post-grid")
-      .insertAdjacentHTML("beforeend", htmlPostData);
-  }
-  posts.forEach(showPost);
-}
-//Creates new post from the json structure
-async function createPost(
-  image,
-  name,
-  creature,
-  size,
-  hitPoints,
-  stats,
-  attack,
-  armor,
-  level
-) {
-  const newPost = {
-    image,
-    name,
-    creature,
-    size,
-    hitPoints,
-    stats,
-    attack,
-    armor,
-    level,
+//create post based on input in the create form. Makes the values into an object.
+function createPost(event) {
+  event.preventDefault();
+  const elements = document.querySelector("#creation-form").elements;
+  const postObject = {
+    name: elements.name.value,
+    creature: elements.creature.value,
+    description: elements.description.value,
+    size: elements.size.value,
+    hitpoints: elements.hitpoints.value,
+    stats_con: elements.stats_con.value,
+    stats_dex: elements.stats_dex.value,
+    stats_int: elements.stats_int.value,
+    stats_str: elements.stats_str.value,
+    attack: elements.attack.value,
+    armor: elements.armor.value,
+    level: elements.level.value,
+    image: elements.image.value,
   };
+  createPostSend(postObject);
+  document.querySelector("#creation-dialog").close();
+}
+
+//Converts object to JSON, sends it to firebase and updates grid if response is ok.
+async function createPostSend(newPost) {
   //The object gets made to a JSON-string
   const jsonString = JSON.stringify(newPost);
   //Use of fetch to POST the json string
@@ -88,6 +63,48 @@ async function createPost(
     updatePostsGrid();
   }
 }
+
+//Gets posts from firebase
+async function getPosts() {
+  const response = await fetch(`${endpoint}/monsters.json`);
+  const data = await response.json();
+  return prepareData(data);
+}
+
+//shows posts in HTML.
+function showPosts(posts) {
+  console.log("Show posts");
+  //Deletes content in table before adding new content to make sure it updates correctly
+  document.querySelector(".post-grid").innerHTML = "";
+  //Shows data in html
+  function showPost(post) {
+    const htmlPostData = /*html*/ `
+          <div class="post-item">
+            <div><img src=${post.image}></>
+            <div id="post_name">Name: ${post.name}</div>
+            <div id="post_creature">Creature: ${post.creature}</div>
+            <div>Size: ${post.size}</div>
+            <div>Hitpoints: ${post.hitpoints}</div>
+            <div>Stats:</div>
+            <div id="post_stats_section">
+              <div>Constitution: ${post.stats_con}</div>
+              <div>Dexterity: ${post.stats_dex}</div>
+              <div>Intelligence: ${post.stats_int}</div>
+              <div>Strength: ${post.stats_str}</div>
+            </div>
+            <div>Attack: ${post.attack}</div>
+            <div>Armor: ${post.armor}</div>
+            <div>Level: ${post.level}</div>
+            
+          </div>
+          `;
+    document
+      .querySelector(".post-grid")
+      .insertAdjacentHTML("beforeend", htmlPostData);
+  }
+  posts.forEach(showPost);
+}
+//Creates new post from the json structure
 
 function prepareData(dataObject) {
   let dataArray = [];

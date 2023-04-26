@@ -113,20 +113,69 @@ function showPosts(posts) {
 /* ------- Update post ------- */
 function updateBtnClicked(post) {
   console.log("Update button clicked");
-  showUpdatePostDialog();
+  const updateForm = document.querySelector("#update-form");
+  //Auto fill current values in post into input
+  updateForm.name.value = post.name;
+  updateForm.creature.value = post.creature;
+  updateForm.description.value = post.description;
+  updateForm.size.value = post.size;
+  updateForm.hitpoints.value = post.hitpoints;
+  updateForm.stats_con.value = post.stats_con;
+  updateForm.stats_dex.value = post.stats_dex;
+  updateForm.stats_int.value = post.stats_int;
+  updateForm.stats_str.value = post.stats_str;
+  updateForm.attack.value = post.attack;
+  updateForm.armor.value = post.armor;
+  updateForm.level.value = post.level;
+  updateForm.image.value = post.image;
 
   //Show update post dialog
-  function showUpdatePostDialog() {
-    const dialog = document.querySelector("#update-dialog");
-    dialog.showModal();
-    document
-      .querySelector("#update-form")
-      .addEventListener("submit", updatePost);
+  const dialog = document.querySelector("#update-dialog");
+  dialog.showModal();
+  //Event for submitting update form
+  document.querySelector("#update-form").addEventListener("submit", updatePost);
+
+  async function updatePost(event) {
+    console.log("Update post");
+    event.preventDefault();
+
+    const postToUpdate = {
+      armor: updateForm.armor.value,
+      attack: updateForm.attack.value,
+      creature: updateForm.creature.value,
+      description: updateForm.description.value,
+      hitpoints: updateForm.hitpoints.value,
+      image: updateForm.image.value,
+      level: updateForm.level.value,
+      name: updateForm.name.value,
+      size: updateForm.size.value,
+      stats_con: updateForm.stats_con.value,
+      stats_dex: updateForm.stats_dex.value,
+      stats_int: updateForm.stats_int.value,
+      stats_str: updateForm.stats_str.value,
+    };
+    //Send the post to update with post id
+    await updatePostSend(post.id, postToUpdate);
+    dialog.close();
   }
-  function updatePost() {}
 }
-async function updatePostSend(postId, postToUpdate) {}
-//Creates new post from the json structure
+//Update content of a post by id
+async function updatePostSend(postId, postObjectToUpdate) {
+  console.log("Send Updated post");
+  const jsonString = JSON.stringify(postObjectToUpdate); //Javascript object to JSON string
+  //Fetch PUT request with the specified element(id)
+  const response = await fetch(`${endpoint}/monsters/${postId}.json`, {
+    method: "PUT",
+    body: jsonString,
+  });
+  //Only updates table if response is successful
+  if (response.ok) {
+    console.log("Update successful");
+    updatePostsGrid();
+  }
+}
+
+//Creates array from the json structure
 function prepareData(dataObject) {
   let dataArray = [];
   for (const key in dataObject) {

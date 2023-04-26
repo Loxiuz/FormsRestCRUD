@@ -15,6 +15,17 @@ async function start() {
   document
     .querySelector("#creation-form")
     .addEventListener("submit", createPost);
+<<<<<<< Updated upstream
+=======
+
+  document
+    .querySelector("#form-delete-post")
+    .addEventListener("submit", deletePostClicked);
+
+  document
+    .querySelector("#btn-cancel")
+    .addEventListener("click", closeDeleteDialog);
+>>>>>>> Stashed changes
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -105,7 +116,27 @@ function showPosts(posts) {
     document
       .querySelector(".post-grid")
       .insertAdjacentHTML("beforeend", htmlPostData);
+<<<<<<< Updated upstream
   }
+=======
+
+    // delete btn
+    document
+      .querySelector(".post-grid .post-item:last-child .btn-delete")
+      .addEventListener("click", deleteClicked);
+
+    //delete clicked function
+    function deleteClicked() {
+      document.querySelector("#dialog-delete-post-title").textContent =
+        post.title;
+      document
+        .querySelector("#form-delete-post")
+        .setAttribute("data-id", post.id);
+      document.querySelector("#dialog-delete-post").showModal();
+    }
+  }
+  posts.forEach(showPost);
+>>>>>>> Stashed changes
 }
 //Creates new post from the json structure
 
@@ -124,3 +155,27 @@ async function updatePostsGrid() {
   const posts = await getPosts();
   showPosts(posts);
 }
+<<<<<<< Updated upstream
+=======
+
+function deletePostClicked(event) {
+  const id = event.target.getAttribute("data-id"); // event.target is the delete form
+  deletePost(id); // call deletePost with id
+  console.log("im here");
+}
+
+async function deletePost(id) {
+  const response = await fetch(`${endpoint}/monsters/${id}.json`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    console.log("post deleted");
+    updatePostsGrid();
+    document.querySelector("#dialog-delete-post").close();
+  }
+}
+
+function closeDeleteDialog() {
+  document.querySelector("#dialog-delete-post").close();
+}
+>>>>>>> Stashed changes

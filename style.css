@@ -5,7 +5,8 @@
   padding: 2em;
 }
 
-#creation-form {
+#creation-form,
+#update-form {
   display: grid;
   grid-template-columns: 1fr;
 }
@@ -23,7 +24,7 @@
   /* background-color: darkgray; */
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 2em;
+  row-gap: 3em;
   column-gap: 1em;
 }
 @media (min-width: 630px) {

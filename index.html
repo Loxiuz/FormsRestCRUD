@@ -12,7 +12,6 @@
       <h1>Monster collection</h1>
     </header>
     <button id="create_btn">Create</button>
-    <dialog></dialog>
     <section class="grid-container">
       <div class="post-grid"></div>
     </section>
@@ -90,6 +89,81 @@
         <hr />
         <input type="reset" value="Clear form" id="create-clear-btn" />
         <input type="submit" value="Submit monster" id="create-submit-btn" />
+      </form>
+    </dialog>
+    <dialog id="update-dialog">
+      <form id="update-form">
+        <h1 style="text-align: center">Update monster post.</h1>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="update-input-name" required />
+        <label for="creature">Creature:</label>
+        <input
+          type="text"
+          name="creature"
+          id="update-input-creature"
+          required
+        />
+        <label for="description">Description:</label>
+        <textarea
+          value=""
+          placeholder="Type a description."
+          name="description"
+          style="resize: none"
+          required
+        ></textarea>
+        <label for="size">Size:</label>
+        <input type="text" name="size" id="update-input-size" required />
+        <label for="hitpoints">Hitpoints:</label>
+        <input
+          type="number"
+          name="hitpoints"
+          id="update-input-hitpoints"
+          required
+        />
+        <hr />
+        <label for="stats">Stats:</label>
+        <div id="stats-container" name="stats">
+          <label for="stats_con">Constitution:</label>
+          <input
+            type="number"
+            name="stats_con"
+            id="update-input-stats-con"
+            required
+          />
+          <label for="stats_dex">Dexterity:</label>
+          <input
+            type="number"
+            name="stats_dex"
+            id="update-input-stats-dex"
+            required
+          />
+          <label for="stats_int">Intellect:</label>
+          <input
+            type="number"
+            name="stats_int"
+            id="update-input-stats-int"
+            required
+          />
+          <label for="stats_str">Strength:</label>
+          <input
+            type="number"
+            name="stats_str"
+            id="update-input-stats-str"
+            required
+          />
+        </div>
+        <hr />
+        <label for="attack">Attack:</label>
+        <input type="text" name="attack" id="update-input-attack" required />
+        <label for="armor">Armor:</label>
+        <input type="number" name="armor" id="update-input-armor" required />
+        <label for="level">Level:</label>
+        <input type="number" name="level" id="update-input-level" required />
+        <label for="image">Image URL:</label>
+        <input type="url" name="image" id="update-input-image" required />
+        <hr />
+        <input type="reset" value="Clear form" id="update-clear-btn" />
+        <input type="submit" value="Update monster" id="update-submit-btn" />
       </form>
     </dialog>
     <!-- CREATE FORM SECTION END -->

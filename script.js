@@ -95,17 +95,38 @@ function showPosts(posts) {
             <div>Attack: ${post.attack}</div>
             <div>Armor: ${post.armor}</div>
             <div>Level: ${post.level}</div>
-            
+            <button id="update_btn">Update Post</button>
           </div>
           `;
     document
       .querySelector(".post-grid")
       .insertAdjacentHTML("beforeend", htmlPostData);
+
+    document
+      .querySelector(".post-grid .post-item:last-child #update_btn")
+      .addEventListener("click", () => {
+        updateBtnClicked(post);
+      });
   }
   posts.forEach(showPost);
 }
-//Creates new post from the json structure
+/* ------- Update post ------- */
+function updateBtnClicked(post) {
+  console.log("Update button clicked");
+  showUpdatePostDialog();
 
+  //Show update post dialog
+  function showUpdatePostDialog() {
+    const dialog = document.querySelector("#update-dialog");
+    dialog.showModal();
+    document
+      .querySelector("#update-form")
+      .addEventListener("submit", updatePost);
+  }
+  function updatePost() {}
+}
+async function updatePostSend(postId, postToUpdate) {}
+//Creates new post from the json structure
 function prepareData(dataObject) {
   let dataArray = [];
   for (const key in dataObject) {

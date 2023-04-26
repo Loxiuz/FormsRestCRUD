@@ -14,7 +14,7 @@
     <button id="create_btn">Create</button>
     <dialog></dialog>
     <section class="grid-container">
-      <div class="post-grid"></div>
+      <div id="posts" class="post-grid"></div>
     </section>
     <!-- CREATE FORM SECTION -->
     <dialog id="creation-dialog">
@@ -92,7 +92,17 @@
         <input type="submit" value="Submit monster" id="create-submit-btn" />
       </form>
     </dialog>
-    <!-- CREATE FORM SECTION END -->
+
+    <!-- dialog - delete post -->
+    <dialog id="dialog-delete-post">
+      <h2>Do you want to delete post?</h2>
+      <p id="dialog-delete-post-title">Title of post</p>
+      <form method="dialog" id="form-delete-post">
+        <button type="button" id="btn-cancel">No</button>
+        <button>Yes</button>
+      </form>
+    </dialog>
+
     <script src="script.js"></script>
   </body>
 </html>

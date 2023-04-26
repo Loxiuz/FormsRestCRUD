@@ -17,10 +17,12 @@ async function start() {
     .addEventListener("submit", createPost);
 
   document
-  .querySelector("#form-delete-post")
-  .addEventListener("submit", deletePostClicked);
+    .querySelector("#form-delete-post")
+    .addEventListener("submit", deletePostClicked);
 
-  document.querySelector("#btn-cancel").addEventListener("click", closeDeleteDialog); 
+  document
+    .querySelector("#btn-cancel")
+    .addEventListener("click", closeDeleteDialog);
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -51,8 +53,8 @@ function createPost(event) {
     image: elements.image.value,
   };
   createPostSend(postObject);
+  document.querySelector("#creation-form").reset();
   document.querySelector("#creation-dialog").close();
-  
 }
 
 //Converts object to JSON, sends it to firebase and updates grid if response is ok.
@@ -109,26 +111,23 @@ function showPosts(posts) {
     document
       .querySelector(".post-grid")
       .insertAdjacentHTML("beforeend", htmlPostData);
-     
-     // delete btn 
-      document
-        .querySelector(".post-grid .post-item:last-child .btn-delete")
-        .addEventListener("click", deleteClicked);
 
-        //delete clicked function
-        function deleteClicked() {
-           document.querySelector("#dialog-delete-post-title").textContent =
-             post.title;
-           document
-             .querySelector("#form-delete-post")
-             .setAttribute("data-id", post.id);
-           document.querySelector("#dialog-delete-post").showModal();
-          }
-          
+    // delete btn
+    document
+      .querySelector(".post-grid .post-item:last-child .btn-delete")
+      .addEventListener("click", deleteClicked);
+
+    //delete clicked function
+    function deleteClicked() {
+      document.querySelector("#dialog-delete-post-title").textContent =
+        post.title;
+      document
+        .querySelector("#form-delete-post")
+        .setAttribute("data-id", post.id);
+      document.querySelector("#dialog-delete-post").showModal();
+    }
   }
   posts.forEach(showPost);
-
-
 }
 //Creates new post from the json structure
 
@@ -148,31 +147,25 @@ async function updatePostsGrid() {
   showPosts(posts);
 }
 
-
-
 function deletePostClicked(event) {
   const id = event.target.getAttribute("data-id"); // event.target is the delete form
   deletePost(id); // call deletePost with id
-  console.log("im here")
+  console.log("im here");
 }
 
-
- async function deletePost(id) {
-   const response = await fetch(`${endpoint}/monsters/${id}.json`, {
-     method: "DELETE",
-   });
-   if (response.ok){
-    console.log("post deleted")
+async function deletePost(id) {
+  const response = await fetch(`${endpoint}/monsters/${id}.json`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    console.log("post deleted");
     updatePostsGrid();
     document.querySelector("#dialog-delete-post").close();
-   }
-   
- }
+  }
+}
 
- function closeDeleteDialog() {
+function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
- }
- 
+}
 
 // TEST OM MERGE VIRKER
-

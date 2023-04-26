@@ -15,6 +15,14 @@ async function start() {
   document
     .querySelector("#creation-form")
     .addEventListener("submit", createPost);
+
+  document
+    .querySelector("#form-delete-post")
+    .addEventListener("submit", deletePostClicked);
+
+  document
+    .querySelector("#btn-cancel")
+    .addEventListener("click", closeDeleteDialog);
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -45,6 +53,7 @@ function createPost(event) {
     image: elements.image.value,
   };
   createPostSend(postObject);
+  document.querySelector("#creation-form").reset();
   document.querySelector("#creation-dialog").close();
 }
 
@@ -75,12 +84,12 @@ async function getPosts() {
 function showPosts(posts) {
   console.log("Show posts");
   //Deletes content in table before adding new content to make sure it updates correctly
-  document.querySelector(".post-grid").innerHTML = "";
+  document.querySelector("#posts").innerHTML = "";
   //Shows data in html
   function showPost(post) {
     const htmlPostData = /*html*/ `
-          <div class="post-item">
-            <div><img src=${post.image}></>
+           <article class="post-item">
+            <img src=${post.image}></>
             <div id="post_name">Name: ${post.name}</div>
             <div id="post_creature">Creature: ${post.creature}</div>
             <div>Size: ${post.size}</div>
@@ -96,7 +105,8 @@ function showPosts(posts) {
             <div>Armor: ${post.armor}</div>
             <div>Level: ${post.level}</div>
             <button id="update_btn">Update Post</button>
-          </div>
+            <button class="btn-delete" data-id="${post.id}">Delete</button>
+          </article>
           `;
     document
       .querySelector(".post-grid")
@@ -107,6 +117,21 @@ function showPosts(posts) {
       .addEventListener("click", () => {
         updateBtnClicked(post);
       });
+
+    // delete btn
+    document
+      .querySelector(".post-grid .post-item:last-child .btn-delete")
+      .addEventListener("click", deleteClicked);
+
+    //delete clicked function
+    function deleteClicked() {
+      document.querySelector("#dialog-delete-post-title").textContent =
+        post.title;
+      document
+        .querySelector("#form-delete-post")
+        .setAttribute("data-id", post.id);
+      document.querySelector("#dialog-delete-post").showModal();
+    }
   }
   posts.forEach(showPost);
 }
@@ -191,3 +216,26 @@ async function updatePostsGrid() {
   const posts = await getPosts();
   showPosts(posts);
 }
+
+function deletePostClicked(event) {
+  const id = event.target.getAttribute("data-id"); // event.target is the delete form
+  deletePost(id); // call deletePost with id
+  console.log("im here");
+}
+
+async function deletePost(id) {
+  const response = await fetch(`${endpoint}/monsters/${id}.json`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    console.log("post deleted");
+    updatePostsGrid();
+    document.querySelector("#dialog-delete-post").close();
+  }
+}
+
+function closeDeleteDialog() {
+  document.querySelector("#dialog-delete-post").close();
+}
+
+// TEST OM MERGE VIRKER

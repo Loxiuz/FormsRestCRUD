@@ -104,3 +104,5 @@ async function updatePostsGrid() {
   const posts = await getPosts();
   showPosts(posts);
 }
+
+// TEST OM MERGE VIRKER

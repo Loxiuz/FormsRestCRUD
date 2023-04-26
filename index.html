@@ -14,8 +14,95 @@
     <button id="create_btn">Create</button>
     <dialog></dialog>
     <section class="grid-container">
-      <div class="post-grid"></div>
+      <div id="posts" class="post-grid"></div>
     </section>
+    <!-- CREATE FORM SECTION -->
+    <dialog id="creation-dialog">
+      <form id="creation-form">
+        <h1 style="text-align: center">New monster post.</h1>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="creation-input-name" required />
+        <label for="creature">Creature:</label>
+        <input
+          type="text"
+          name="creature"
+          id="creation-input-creature"
+          required
+        />
+        <label for="description">Description:</label>
+        <textarea
+          value=""
+          placeholder="Type a description."
+          name="description"
+          style="resize: none"
+          required
+        ></textarea>
+        <label for="size">Size:</label>
+        <input type="text" name="size" id="creation-input-size" required />
+        <label for="hitpoints">Hitpoints:</label>
+        <input
+          type="number"
+          name="hitpoints"
+          id="creation-input-hitpoints"
+          required
+        />
+        <hr />
+        <label for="stats">Stats:</label>
+        <div id="stats-container" name="stats">
+          <label for="stats_con">Constitution:</label>
+          <input
+            type="number"
+            name="stats_con"
+            id="creation-input-stats-con"
+            required
+          />
+          <label for="stats_dex">Dexterity:</label>
+          <input
+            type="number"
+            name="stats_dex"
+            id="creation-input-stats-dex"
+            required
+          />
+          <label for="stats_int">Intellect:</label>
+          <input
+            type="number"
+            name="stats_int"
+            id="creation-input-stats-int"
+            required
+          />
+          <label for="stats_str">Strength:</label>
+          <input
+            type="number"
+            name="stats_str"
+            id="creation-input-stats-str"
+            required
+          />
+        </div>
+        <hr />
+        <label for="attack">Attack:</label>
+        <input type="text" name="attack" id="creation-input-attack" required />
+        <label for="armor">Armor:</label>
+        <input type="number" name="armor" id="creation-input-armor" required />
+        <label for="level">Level:</label>
+        <input type="number" name="level" id="creation-input-level" required />
+        <label for="image">Image URL:</label>
+        <input type="url" name="image" id="creation-input-image" required />
+        <hr />
+        <input type="reset" value="Clear form" id="create-clear-btn" />
+        <input type="submit" value="Submit monster" id="create-submit-btn" />
+      </form>
+    </dialog>
+
+    <!-- dialog - delete post -->
+    <dialog id="dialog-delete-post">
+      <h2>Do you want to delete post?</h2>
+      <p id="dialog-delete-post-title">Title of post</p>
+      <form method="dialog" id="form-delete-post">
+        <button type="button" id="btn-cancel">No</button>
+        <button>Yes</button>
+      </form>
+    </dialog>
+
     <script src="script.js"></script>
   </body>
 </html>

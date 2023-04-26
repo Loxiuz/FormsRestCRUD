@@ -89,24 +89,24 @@ function showPosts(posts) {
   function showPost(post) {
     const htmlPostData = /*html*/ `
            <article class="post-item">
-            <img src=${post.image}></>
-            <div id="post_name">Name: ${post.name}</div>
-            <div id="post_creature">Creature: ${post.creature}</div>
-            <div>Size: ${post.size}</div>
-            <div>Hitpoints: ${post.hitpoints}</div>
-            <div>Stats:</div>
-            <div id="post_stats_section">
-              <div>Constitution: ${post.stats_con}</div>
-              <div>Dexterity: ${post.stats_dex}</div>
-              <div>Intelligence: ${post.stats_int}</div>
-              <div>Strength: ${post.stats_str}</div>
-            </div>
-            <div>Attack: ${post.attack}</div>
-            <div>Armor: ${post.armor}</div>
-            <div>Level: ${post.level}</div>
-            <button id="update_btn">Update Post</button>
-            <button class="btn-delete" data-id="${post.id}">Delete</button>
-          </article>
+              <img src=${post.image}></>
+              <div id="post_name">Name: ${post.name}</div>
+              <div id="post_creature">Creature: ${post.creature}</div>
+              <div>Size: ${post.size}</div>
+              <div>Hitpoints: ${post.hitpoints}</div>
+              <div>Stats:</div>
+              <div id="post_stats_section">
+                <div>Constitution: ${post.stats_con}</div>
+                <div>Dexterity: ${post.stats_dex}</div>
+                <div>Intelligence: ${post.stats_int}</div>
+                <div>Strength: ${post.stats_str}</div>
+              </div>
+              <div>Attack: ${post.attack}</div>
+              <div>Armor: ${post.armor}</div>
+              <div>Level: ${post.level}</div>
+              <button id="update_btn">Update Post</button>
+              <button class="btn-delete" data-id="${post.id}">Delete</button>
+           </article>
           `;
     document
       .querySelector(".post-grid")

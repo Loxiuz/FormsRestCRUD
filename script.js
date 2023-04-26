@@ -148,6 +148,8 @@ async function updatePostsGrid() {
   showPosts(posts);
 }
 
+
+
 function deletePostClicked(event) {
   const id = event.target.getAttribute("data-id"); // event.target is the delete form
   deletePost(id); // call deletePost with id
@@ -170,3 +172,7 @@ function deletePostClicked(event) {
  function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
  }
+ 
+
+// TEST OM MERGE VIRKER
+

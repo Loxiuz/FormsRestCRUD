@@ -45,6 +45,7 @@ function createPost(event) {
     image: elements.image.value,
   };
   createPostSend(postObject);
+  document.querySelector("#creation-form").reset();
   document.querySelector("#creation-dialog").close();
 }
 
@@ -73,14 +74,17 @@ async function getPosts() {
 
 //shows posts in HTML.
 function showPosts(posts) {
-  console.log("Show posts");
-  //Deletes content in table before adding new content to make sure it updates correctly
   document.querySelector(".post-grid").innerHTML = "";
-  //Shows data in html
+  // Resets innerHTML in posts.
+  for (const post of posts) {
+    showPost(post);
+  }
+
+  //shows post in HTML.
   function showPost(post) {
     const htmlPostData = /*html*/ `
           <div class="post-item">
-            <div><img src=${post.image}></>
+            <img src=${post.image}>
             <div id="post_name">Name: ${post.name}</div>
             <div id="post_creature">Creature: ${post.creature}</div>
             <div>Size: ${post.size}</div>
@@ -95,14 +99,13 @@ function showPosts(posts) {
             <div>Attack: ${post.attack}</div>
             <div>Armor: ${post.armor}</div>
             <div>Level: ${post.level}</div>
-            
+            <button class="btn-delete">Delete</button>
           </div>
           `;
     document
       .querySelector(".post-grid")
       .insertAdjacentHTML("beforeend", htmlPostData);
   }
-  posts.forEach(showPost);
 }
 //Creates new post from the json structure
 

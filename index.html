@@ -8,12 +8,10 @@
     <title>Monster-API</title>
   </head>
   <body>
-    <header>
-      <h1>Monster collection</h1>
-    </header>
-    <button id="create_btn">Create</button>
-    <dialog></dialog>
     <section class="grid-container">
+      <div class="menu-grid">
+        <button id="create_btn">Create</button>
+      </div>
       <div class="post-grid"></div>
     </section>
     <!-- CREATE FORM SECTION -->
@@ -86,7 +84,7 @@
         <label for="level">Level:</label>
         <input type="number" name="level" id="creation-input-level" required />
         <label for="image">Image URL:</label>
-        <input type="url" name="image" id="creation-input-image" required />
+        <input type="url" name="image" id="creation-input-image" />
         <hr />
         <input type="reset" value="Clear form" id="create-clear-btn" />
         <input type="submit" value="Submit monster" id="create-submit-btn" />

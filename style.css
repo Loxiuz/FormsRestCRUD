@@ -1,6 +1,6 @@
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 8fr;
   gap: 2%;
   padding: 2em;
 }
@@ -71,4 +71,11 @@
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
+}
+.menu-grid {
+  background-color: blue;
+}
+
+.menu-grid button {
+  width: 100%;
 }

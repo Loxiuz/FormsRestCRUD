@@ -30,7 +30,7 @@ async function start() {
 
   document
     .querySelector("#reset_filter_btn")
-    .addEventListener("click", updatePostsGrid);
+    .addEventListener("click", resetCreatureFilter);
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -262,6 +262,17 @@ async function filterPostsByCreature() {
     console.log("Check Creature");
     return post.creature.toLowerCase() == filterForm.creature.value;
   }
+}
+//Resets the radio buttons
+function resetCreatureFilter() {
+  const radioButtons = document.querySelectorAll(
+    "#filter_form input[type=radio]"
+  );
+  for (let i = 0; i < radioButtons.length; i++) {
+    radioButtons[i].checked = false;
+  }
+  //To reset the filter and show all posts again
+  updatePostsGrid();
 }
 
 // TEST OM MERGE VIRKER

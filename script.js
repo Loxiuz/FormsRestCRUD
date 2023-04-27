@@ -23,14 +23,6 @@ async function start() {
   document
     .querySelector("#btn-cancel")
     .addEventListener("click", closeDeleteDialog);
-
-  document
-    .querySelector("#filter_btn")
-    .addEventListener("click", filterPostsByCreature);
-
-  document
-    .querySelector("#reset_filter_btn")
-    .addEventListener("click", resetCreatureFilter);
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -83,6 +75,7 @@ async function createPostSend(newPost) {
 
 //Gets posts from firebase
 async function getPosts() {
+  console.log("Get posts");
   const response = await fetch(`${endpoint}/monsters.json`);
   const data = await response.json();
   return prepareData(data);
@@ -247,10 +240,9 @@ function closeDeleteDialog() {
 }
 
 //Filters post by creature
-async function filterPostsByCreature() {
+async function filterPostsByCreature(creature) {
   console.log("Filtered posts by creature");
   const posts = await getPosts();
-  const filterForm = document.querySelector("#filter_form");
 
   const filteredPosts = posts.filter(checkCreature);
 
@@ -260,20 +252,8 @@ async function filterPostsByCreature() {
   //Check for posts that has the same creature value as the input
   function checkCreature(post) {
     console.log("Check Creature");
-    return post.creature.toLowerCase() == filterForm.creature.value;
+    return post.creature.toLowerCase() == creature;
   }
-}
-//Resets the radio buttons
-function resetCreatureFilter() {
-  const radioButtons = document.querySelectorAll(
-    "#filter_form input[type=radio]"
-  );
-  //Unchecks all radio buttons
-  for (let i = 0; i < radioButtons.length; i++) {
-    radioButtons[i].checked = false;
-  }
-  //Reset the filter and show all posts again
-  updatePostsGrid();
 }
 
 // TEST OM MERGE VIRKER

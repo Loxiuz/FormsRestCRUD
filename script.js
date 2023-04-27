@@ -27,6 +27,7 @@ async function start() {
   document
     .querySelector("#filter_btn")
     .addEventListener("click", filterPostsByCreature);
+
   document
     .querySelector("#reset_filter_btn")
     .addEventListener("click", updatePostsGrid);
@@ -245,6 +246,7 @@ function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
 }
 
+//Filters post by creature
 async function filterPostsByCreature() {
   console.log("Filtered posts by creature");
   const posts = await getPosts();
@@ -252,8 +254,10 @@ async function filterPostsByCreature() {
 
   const filteredPosts = posts.filter(checkCreature);
 
+  //Show the array with filtered posts
   showPosts(filteredPosts);
 
+  //Check for posts that has the same creature value as the input
   function checkCreature(post) {
     console.log("Check Creature");
     return post.creature.toLowerCase() == filterForm.creature.value;

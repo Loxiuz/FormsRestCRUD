@@ -268,10 +268,11 @@ function resetCreatureFilter() {
   const radioButtons = document.querySelectorAll(
     "#filter_form input[type=radio]"
   );
+  //Unchecks all radio buttons
   for (let i = 0; i < radioButtons.length; i++) {
     radioButtons[i].checked = false;
   }
-  //To reset the filter and show all posts again
+  //Reset the filter and show all posts again
   updatePostsGrid();
 }
 

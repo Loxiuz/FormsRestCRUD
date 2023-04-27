@@ -23,7 +23,7 @@ body {
 }
 
 #menu-section button,
-#filter_form input {
+#filter_creatures input {
   border-radius: 0px;
   border-style: none;
   height: 2em;

@@ -23,6 +23,8 @@ async function start() {
   document
     .querySelector("#btn-cancel")
     .addEventListener("click", closeDeleteDialog);
+
+  makeFilterCreatureButtons();
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -239,6 +241,38 @@ function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
 }
 
+/* ------------- Filter Buttons ------------- */
+
+//Makes the buttons for the creature filter in html
+async function makeFilterCreatureButtons() {
+  console.log("Make Filter Creature Buttons");
+  const creatures = await getCreaturesFromPosts();
+  for (let i = 0; i < creatures.length; i++) {
+    const creatureFilterBtnHtml = /* html */ `
+      <input
+        type="button"
+        id="${creatures[i].toLowerCase()}"
+        onclick="filterPostsByCreature('${creatures[i].toLowerCase()}')"
+        value="${creatures[i]}"
+      />
+    `;
+    document
+      .querySelector("#filter_creatures")
+      .insertAdjacentHTML("beforeend", creatureFilterBtnHtml);
+  }
+}
+//Gets one of each different type of creature and puts it in a new array
+async function getCreaturesFromPosts() {
+  console.log("Get creatures from posts");
+  const posts = await getPosts();
+  let differntCreatures = [];
+  for (let i = 0; i < posts.length; i++) {
+    if (!differntCreatures.includes(posts[i].creature)) {
+      differntCreatures.push(posts[i].creature);
+    }
+  }
+  return differntCreatures;
+}
 //Filters post by creature
 async function filterPostsByCreature(creature) {
   console.log("Filtered posts by creature");

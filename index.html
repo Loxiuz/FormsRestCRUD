@@ -13,45 +13,15 @@
       <div id="menu-section">
         <h1 class="menu-title">The Monster Collection</h1>
         <button id="create_btn">Create new post</button>
-        <form id="filter_form">
-          <h3>Filter Posts By Creature:</h3>
+        <div id="filter_creatures">
+          <h3>Filter Monsters By Creature:</h3>
           <input
             type="button"
             id="all_creatures"
             onclick="updatePostsGrid()"
             value="All"
           />
-          <input
-            type="button"
-            id="fiend"
-            onclick="filterPostsByCreature('fiend')"
-            value="Fiend"
-          />
-          <input
-            type="button"
-            id="beast"
-            onclick="filterPostsByCreature('beast')"
-            value="Beast"
-          />
-          <input
-            type="button"
-            id="undead"
-            onclick="filterPostsByCreature('undead')"
-            value="Undead"
-          />
-          <input
-            type="button"
-            id="elemental"
-            onclick="filterPostsByCreature('elemental')"
-            value="Elemental"
-          />
-          <input
-            type="button"
-            id="dragon"
-            onclick="filterPostsByCreature('dragon')"
-            value="Dragon"
-          />
-        </form>
+        </div>
       </div>
 
       <!-- POSTS GRID -->

@@ -89,8 +89,8 @@ function showPosts(posts) {
   function showPost(post) {
     const htmlPostData = /*html*/ `
            <article class="post-item">
+              <div id="post_name">${post.name}</div>
               <img src=${post.image}></>
-              <div id="post_name">Name: ${post.name}</div>
               <div id="post_creature">Creature: ${post.creature}</div>
               <div>Size: ${post.size}</div>
               <div>Hitpoints: ${post.hitpoints}</div>

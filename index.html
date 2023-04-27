@@ -9,21 +9,41 @@
   </head>
   <body>
     <div id="screen">
-<!-- HEADER -->
-    <div id="menu-section">
-      <h1 class="menu-title">The Monster Collection</h1>
-      <button id="create_btn">Create new post</button>
-    </div>
-    
-<!-- POSTS GRID -->
-    <div id="post-section">
-    <section class="grid-container">
-      <div id="posts" class="post-grid"></div>
-    </section>
-    </div>
+      <!-- HEADER -->
+      <div id="menu-section">
+        <h1 class="menu-title">The Monster Collection</h1>
+        <button id="create_btn">Create new post</button>
+        <form id="filter_form">
+          <h3>Filter Posts By Creature:</h3>
+          <input type="radio" id="creature1" name="creature" value="fiend" />
+          <label for="creature1">Fiend</label><br />
+          <input type="radio" id="creature2" name="creature" value="beast" />
+          <label for="creature2">Beast</label><br />
+          <input type="radio" id="creature3" name="creature" value="undead" />
+          <label for="creature3">Undead</label><br />
+          <input
+            type="radio"
+            id="creature4"
+            name="creature"
+            value="elemental"
+          />
+          <label for="creature4">Elemental</label><br />
+          <input type="radio" id="creature5" name="creature" value="dragon" />
+          <label for="creature5">Dragon</label><br />
+          <br />
+          <input type="button" id="filter_btn" value="Show chosen creature" />
+          <input type="button" id="reset_filter_btn" value="Reset Filter" />
+        </form>
+      </div>
 
+      <!-- POSTS GRID -->
+      <div id="post-section">
+        <section class="grid-container">
+          <div id="posts" class="post-grid"></div>
+        </section>
+      </div>
     </div>
-<!-- CREATE FORM SECTION -->
+    <!-- CREATE FORM SECTION -->
     <dialog id="creation-dialog">
       <form id="creation-form">
         <h1 style="text-align: center">New monster post.</h1>
@@ -99,8 +119,8 @@
         <input type="submit" value="Submit monster" id="create-submit-btn" />
       </form>
     </dialog>
-    
-<!-- UPDATE FORM SECTION -->
+
+    <!-- UPDATE FORM SECTION -->
     <dialog id="update-dialog">
       <form id="update-form">
         <h1 style="text-align: center">Update monster post.</h1>
@@ -176,8 +196,8 @@
         <input type="submit" value="Update monster" id="update-submit-btn" />
       </form>
     </dialog>
- 
-<!-- DELETE FORM SECTION -->
+
+    <!-- DELETE FORM SECTION -->
     <dialog id="dialog-delete-post">
       <h2>Do you want to delete post?</h2>
       <p id="dialog-delete-post-title">Title of post</p>

@@ -23,6 +23,13 @@ async function start() {
   document
     .querySelector("#btn-cancel")
     .addEventListener("click", closeDeleteDialog);
+
+  document
+    .querySelector("#filter_btn")
+    .addEventListener("click", filterPostsByCreature);
+  document
+    .querySelector("#reset_filter_btn")
+    .addEventListener("click", updatePostsGrid);
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -236,6 +243,21 @@ async function deletePost(id) {
 
 function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
+}
+
+async function filterPostsByCreature() {
+  console.log("Filtered posts by creature");
+  const posts = await getPosts();
+  const filterForm = document.querySelector("#filter_form");
+
+  const filteredPosts = posts.filter(checkCreature);
+
+  showPosts(filteredPosts);
+
+  function checkCreature(post) {
+    console.log("Check Creature");
+    return post.creature.toLowerCase() == filterForm.creature.value;
+  }
 }
 
 // TEST OM MERGE VIRKER

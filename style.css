@@ -22,8 +22,7 @@ body {
   margin: 0px;
 }
 
-#menu-section button,
-#filter_creatures input {
+#menu-section button {
   border-radius: 0px;
   border-style: none;
   height: 2em;

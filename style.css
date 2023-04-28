@@ -1,5 +1,5 @@
 body {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   background-color: grey;
 }
 
@@ -88,8 +88,9 @@ body {
 }
 .post-item {
   display: grid;
+  position: relative;
   background-image: url("pictures/vintage-grunge-paper-background.jpg");
-  background-size: 130%;
+  background-size: cover;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.273);
   padding: 10px;
   border: 1px solid rgb(159, 81, 3);
@@ -98,7 +99,9 @@ body {
   padding: 10px;
   text-align: left;
   height: 100%;
-  transition: all .5s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  max-width: fit-content;
 }
 
 .post-item img {
@@ -124,19 +127,18 @@ body {
 
 #post_name {
   font-size: 1.5em;
-  color:rgb(110, 55, 0);
+  color: rgb(110, 55, 0);
   text-align: center;
   font-weight: bold;
 }
 
 .post-item button {
   transition: all 0.2s ease;
-  background-color:rgba(110, 55, 0, 0.232);
+  background-color: rgba(110, 55, 0, 0.232);
   border: 1px solid black;
 }
 
 .post-item button:hover {
-  background-color:rgba(110, 55, 0, 0.544);
+  background-color: rgba(110, 55, 0, 0.544);
   border: 1px solid black;
 }
-

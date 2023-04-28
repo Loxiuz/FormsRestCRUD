@@ -91,19 +91,20 @@ function showPosts(posts) {
            <article class="post-item">
               <div id="post_name">${post.name}</div>
               <img src=${post.image}></>
-              <div id="post_creature">Creature: ${post.creature}</div>
-              <div>Size: ${post.size}</div>
+              <div>Level: ${post.level}</div>
               <div>Hitpoints: ${post.hitpoints}</div>
               <div>Stats:</div>
               <div id="post_stats_section">
-                <div>Constitution: ${post.stats_con}</div>
-                <div>Dexterity: ${post.stats_dex}</div>
-                <div>Intelligence: ${post.stats_int}</div>
                 <div>Strength: ${post.stats_str}</div>
+                <div>Dexterity: ${post.stats_dex}</div>
+                <div>Constitution: ${post.stats_con}</div>
+                <div>Intelligence: ${post.stats_int}</div>
               </div>
+              <div id="post_creature">Creature: ${post.creature}</div>
+              <div>Size: ${post.size}</div>
               <div>Attack: ${post.attack}</div>
               <div>Armor: ${post.armor}</div>
-              <div>Level: ${post.level}</div>
+              
               <button id="update_btn">Update Post</button>
               <button class="btn-delete" data-id="${post.id}">Delete</button>
            </article>

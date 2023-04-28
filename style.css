@@ -1,12 +1,21 @@
 body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-color: grey;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("pictures/background-image.jpg");
+  background-position: center top;
+  background-size: fill;
+}
+
+dialog {
+  background-image: url("pictures/vintage-grunge-paper-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #screen {
   display: grid;
   position: static;
-  grid-template-columns: 1fr 9fr;
+  grid-template-columns: 1fr 10fr;
   margin: 0px;
   padding: 0px;
   height: 100%;
@@ -40,8 +49,26 @@ body {
 /* FORMS */
 #creation-form,
 #update-form {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
+  width: fit-content;
+}
+
+.double-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.double-buttons input {
+  transition: all 0.2s ease;
+  background-color: rgba(110, 55, 0, 0.232);
+  border: 1px solid black;
+}
+
+.double-buttons input:hover {
+  background-color: rgba(110, 55, 0, 0.544);
+  border: 1px solid black;
 }
 
 #stats-container {
@@ -52,6 +79,32 @@ body {
   margin: 5px;
 }
 
+#close-creation-button {
+  height: 2em;
+  width: 2em;
+  text-align: center;
+  border: none;
+  background: none;
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+#close-creation-button:hover {
+  background-color: rgba(0, 0, 0, 0.144);
+}
+
+#close-details-button {
+  display: none;
+  position: absolute;
+  right: 20px;
+  height: 2em;
+  width: 2em;
+  text-align: center;
+  border: none;
+  background: none;
+  margin-left: auto;
+  margin-right: 0px;
+}
 /* ------ Posts (grid) ------ */
 .post-grid {
   /* background-color: darkgray; */
@@ -59,6 +112,7 @@ body {
   grid-template-columns: 1fr;
   row-gap: 2em;
   column-gap: 0.5em;
+  width: 100%;
 }
 @media (min-width: 630px) {
   .post-grid {
@@ -88,7 +142,7 @@ body {
 }
 .post-item {
   display: grid;
-  position: relative;
+  grid-template-columns: 1fr;
   background-image: url("pictures/vintage-grunge-paper-background.jpg");
   background-size: cover;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.273);
@@ -98,10 +152,9 @@ body {
   margin: 10px;
   padding: 10px;
   text-align: left;
-  height: 100%;
   transition: all 0.2s ease-in-out;
-  width: 100%;
-  max-width: fit-content;
+  max-width: 400px;
+  object-fit: fill;
 }
 
 .post-item img {
@@ -110,7 +163,10 @@ body {
   align-self: center;
   align-items: center;
   margin: auto;
-  height: 8em;
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center left;
 }
 
 .post-item:hover {
@@ -139,6 +195,55 @@ body {
 }
 
 .post-item button:hover {
+  background-color: rgba(110, 55, 0, 0.544);
+  border: 1px solid black;
+}
+
+#details-view {
+  position: relative;
+  border: 3px solid rgba(110, 55, 0, 0.544);
+  border-radius: 10px;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  margin: auto;
+  background-image: url("pictures/vintage-grunge-paper-background.jpg");
+  background-size: cover;
+}
+
+#details-view img {
+  border: 1px solid black;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  margin: auto;
+  max-width: 35em;
+  max-height: 35em;
+  object-fit: contain;
+}
+
+#details-text-section {
+  max-width: 32em;
+  text-align: left;
+}
+
+#details-close-btn {
+  display: block;
+  position: absolute;
+  right: 20px;
+  margin-bottom: 30px;
+  transition: all 0.2s ease;
+  background-color: rgba(110, 55, 0, 0.232);
+  border: 1px solid black;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 0px;
+  align-self: right;
+}
+
+#details-view button:hover {
   background-color: rgba(110, 55, 0, 0.544);
   border: 1px solid black;
 }

@@ -26,6 +26,7 @@
     <!-- CREATE FORM SECTION -->
     <dialog id="creation-dialog">
       <form id="creation-form">
+        <input type="button" id="close-creation-button" value="✖" />
         <h1 style="text-align: center">New monster post.</h1>
         <label for="name">Name:</label>
         <input type="text" name="name" id="creation-input-name" required />
@@ -95,8 +96,10 @@
         <label for="image">Image URL:</label>
         <input type="url" name="image" id="creation-input-image" required />
         <hr />
-        <input type="reset" value="Clear form" id="create-clear-btn" />
-        <input type="submit" value="Submit monster" id="create-submit-btn" />
+        <div class="double-buttons">
+          <input type="reset" value="Clear form" id="create-clear-btn" />
+          <input type="submit" value="Submit monster" id="create-submit-btn" />
+        </div>
       </form>
     </dialog>
 
@@ -187,6 +190,11 @@
       </form>
     </dialog>
 
+    <!-- DETAILS DIALOG SECTION -->
+    <dialog id="details-view">
+      <button id="details-close-btn">✖</button>
+      <section id="details-section"></section>
+    </dialog>
     <script src="script.js"></script>
   </body>
 </html>

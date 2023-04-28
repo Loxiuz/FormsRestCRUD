@@ -23,6 +23,18 @@ async function start() {
   document
     .querySelector("#btn-cancel")
     .addEventListener("click", closeDeleteDialog);
+
+  document
+    .querySelector("#details-close-btn")
+    .addEventListener("click", closeDetailsDialog);
+
+  document
+    .querySelector("#close-creation-button")
+    .addEventListener("click", closeCreationDialog);
+}
+
+function closeDetailsDialog() {
+  document.querySelector("#details-view").close();
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -93,20 +105,14 @@ function showPosts(posts) {
               <img src=${post.image}></>
               <div>Level: ${post.level}</div>
               <div>Hitpoints: ${post.hitpoints}</div>
-              <div>Stats:</div>
-              <div id="post_stats_section">
-                <div>Strength: ${post.stats_str}</div>
-                <div>Dexterity: ${post.stats_dex}</div>
-                <div>Constitution: ${post.stats_con}</div>
-                <div>Intelligence: ${post.stats_int}</div>
-              </div>
               <div id="post_creature">Creature: ${post.creature}</div>
               <div>Size: ${post.size}</div>
-              <div>Attack: ${post.attack}</div>
-              <div>Armor: ${post.armor}</div>
-              
-              <button id="update_btn">Update Post</button>
-              <button class="btn-delete" data-id="${post.id}">Delete</button>
+              <br />
+              <hr>
+               <div class="double-buttons">
+                  <button id="update_btn">Update Post</button>
+                  <button class="btn-delete" data-id="${post.id}">Delete</button>
+              </div>
            </article>
           `;
     document
@@ -119,6 +125,9 @@ function showPosts(posts) {
         updateBtnClicked(post);
       });
 
+    document
+      .querySelector(".post-grid .post-item:last-child")
+      .addEventListener("click", postClicked);
     // delete btn
     document
       .querySelector(".post-grid .post-item:last-child .btn-delete")
@@ -133,8 +142,41 @@ function showPosts(posts) {
         .setAttribute("data-id", post.id);
       document.querySelector("#dialog-delete-post").showModal();
     }
+
+    function postClicked() {
+      console.log(post);
+      document.querySelector("#details-section").innerHTML = "";
+      document.querySelector("#details-section").insertAdjacentHTML(
+        "afterbegin",
+        /*html*/ `
+      <div id="post_name">${post.name}</div>
+              <img src=${post.image}></>
+              <div style="text-align: center;">${post.description}</div>
+              <div id="details-text-section">
+              <div>Level: ${post.level}</div>
+              <div>Hitpoints: ${post.hitpoints}</div>
+              <div>Stats:</div>
+              <div id="post_stats_section">
+                <div>Strength: ${post.stats_str}</div>
+                <div>Dexterity: ${post.stats_dex}</div>
+                <div>Constitution: ${post.stats_con}</div>
+                <div>Intelligence: ${post.stats_int}</div>
+              </div>
+              <div id="post_creature">Creature: ${post.creature}</div>
+              <div>Size: ${post.size}</div>
+              <div>Attack: ${post.attack}</div>
+              <div>Armor: ${post.armor}</div>
+              </div>
+      `
+      );
+      document.querySelector("#details-view").showModal();
+    }
   }
   posts.forEach(showPost);
+}
+
+function closeCreationDialog() {
+  document.querySelector("#creation-dialog").close();
 }
 /* ------------------UPDATE FORM SECTION----------------- */
 function updateBtnClicked(post) {

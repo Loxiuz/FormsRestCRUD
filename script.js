@@ -228,6 +228,7 @@ function updateBtnClicked(post) {
     //Send the post to update with post id
     await updatePostSend(post.id, postToUpdate);
     dialog.close();
+    notify(post, "updated");
   }
 }
 //Update content of a post by id
@@ -350,4 +351,11 @@ async function filterPostsByCheckedCreatures() {
       updatePostsGrid(); //When theres no checked checkboxes show all posts
     }
   });
+}
+
+function notify(post, message) {
+  const messageHtml = /* html */ `
+    <h3>${post.name} has been ${message}!</h3>
+  `;
+  document.querySelector("footer").insertAdjacentHTML("beforeend", messageHtml);
 }

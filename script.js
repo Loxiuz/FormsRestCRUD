@@ -103,7 +103,7 @@ function showPosts(posts) {
   //Shows data in html
   function showPost(post) {
     const htmlPostData = /*html*/ `
-           <article class="post-item">
+           <article class="post-item" id="post_${post.id}">
               <div id="post_name">${post.name}</div>
               <img src=${post.image}></>
               <div>Level: ${post.level}</div>
@@ -242,7 +242,7 @@ function updateBtnClicked(post) {
     //Send the post to update with post id
     await updatePostSend(post.id, postToUpdate);
     dialog.close();
-    notify(post, "updated");
+    notify(post.name, "updated");
   }
 }
 //Update content of a post by id
@@ -274,6 +274,7 @@ function prepareData(dataObject) {
 //Updates post table
 async function updatePostsGrid() {
   console.log("Update posts");
+  document.querySelector("footer").classList.add("hidden"); //Hide the footer for notifications
   const posts = await getPosts();
   showPosts(posts);
 }
@@ -281,7 +282,6 @@ async function updatePostsGrid() {
 function deletePostClicked(event) {
   const id = event.target.getAttribute("data-id"); // event.target is the delete form
   deletePost(id); // call deletePost with id
-  console.log("im here");
 }
 
 async function deletePost(id) {
@@ -292,6 +292,10 @@ async function deletePost(id) {
     console.log("post deleted");
     updatePostsGrid();
     document.querySelector("#dialog-delete-post").close();
+    notify(
+      document.querySelector(`#post_${id} #post_name`).innerHTML,
+      "deleted"
+    );
   }
 }
 
@@ -366,10 +370,25 @@ async function filterPostsByCheckedCreatures() {
     }
   });
 }
-
-function notify(post, message) {
+//Notify user of a message when updating and deleting a post
+function notify(name, message) {
+  console.log("notification");
+  const footer = document.querySelector("footer");
+  footer.innerHTML = ""; //Clear html to avoid duplication
+  //Add html to footer
   const messageHtml = /* html */ `
-    <h3>${post.name} has been ${message}!</h3>
+    <h3>${name} has been ${message}!</h3>
   `;
-  document.querySelector("footer").insertAdjacentHTML("beforeend", messageHtml);
+  footer.insertAdjacentHTML("beforeend", messageHtml);
+  //Animation for footer
+  footer.classList.remove("hidden");
+  footer.classList.add("slideUp");
+  footer.addEventListener("animationend", () => {
+    footer.classList.remove("slideUp");
+    footer.classList.add("slideDown");
+    footer.addEventListener("animationend", () => {
+      footer.classList.remove("slideDown");
+      footer.classList.add("hidden");
+    });
+  });
 }

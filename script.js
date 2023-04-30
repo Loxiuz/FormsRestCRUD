@@ -31,12 +31,12 @@ async function start() {
   document
     .querySelector("#close-creation-button")
     .addEventListener("click", closeCreationDialog);
+
+  makeFilterCreatureCheckboxes(); //Create the checkboxes for the filter
 }
 
 function closeDetailsDialog() {
   document.querySelector("#details-view").close();
-
-  makeFilterCreatureButtons();
 }
 
 //------------------CREATE FORM SECTION-----------------
@@ -287,7 +287,7 @@ function closeDeleteDialog() {
 /* ------------- Filter Buttons ------------- */
 
 //Makes the buttons for the creature filter in html
-async function makeFilterCreatureButtons() {
+async function makeFilterCreatureCheckboxes() {
   console.log("Make Filter Creature Buttons");
   const creatures = await getCreaturesFromPosts();
   for (let i = 0; i < creatures.length; i++) {

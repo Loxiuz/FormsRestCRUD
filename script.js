@@ -285,10 +285,10 @@ async function filterPostsByCheckedCreatures() {
   const filterForm = document.querySelector("#filter-creature-form");
   //Add event to form when it changes
   filterForm.addEventListener("change", () => {
-    const selected = []; //Array with checkboxes that are checked
+    const selected = []; //Array with the checkboxes that are checked
     const inputs = filterForm.querySelectorAll("input[type='checkbox']");
-    const filteredPosts = []; //Array with post after being filterd
-    //Makes the array with the checked boxes
+    const filteredPosts = []; //Array with the posts after being filterd
+    //Makes an array with the checked boxes
     for (const input of inputs) {
       if (input.checked) {
         selected.push(input.value);
@@ -304,7 +304,7 @@ async function filterPostsByCheckedCreatures() {
     if (!filteredPosts.length == 0) {
       showPosts(filteredPosts);
     } else {
-      updatePostsGrid();
+      updatePostsGrid(); //When theres no checked checkboxes show all posts
     }
   });
 }

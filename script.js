@@ -32,6 +32,8 @@ async function start() {
     .querySelector("#close-creation-button")
     .addEventListener("click", closeCreationDialog);
 
+  document.querySelector("footer").classList.add("hidden"); //Hide the footer for notifications
+
   makeFilterCreatureCheckboxes(); //Create the checkboxes for the filter
 }
 
@@ -274,7 +276,6 @@ function prepareData(dataObject) {
 //Updates post table
 async function updatePostsGrid() {
   console.log("Update posts");
-  document.querySelector("footer").classList.add("hidden"); //Hide the footer for notifications
   const posts = await getPosts();
   showPosts(posts);
 }

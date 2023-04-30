@@ -31,6 +31,8 @@ async function start() {
   document
     .querySelector("#close-creation-button")
     .addEventListener("click", closeCreationDialog);
+
+  makeFilterCreatureCheckboxes(); //Create the checkboxes for the filter
 }
 
 function closeDetailsDialog() {
@@ -87,6 +89,7 @@ async function createPostSend(newPost) {
 
 //Gets posts from firebase
 async function getPosts() {
+  console.log("Get posts");
   const response = await fetch(`${endpoint}/monsters.json`);
   const data = await response.json();
   return prepareData(data);
@@ -126,7 +129,7 @@ function showPosts(posts) {
       });
 
     document
-      .querySelector(".post-grid .post-item:last-child")
+      .querySelector(".post-grid .post-item:last-child img")
       .addEventListener("click", postClicked);
     // delete btn
     document
@@ -281,4 +284,70 @@ function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
 }
 
-// TEST OM MERGE VIRKER
+/* ------------- Filter Buttons ------------- */
+
+//Makes the buttons for the creature filter in html
+async function makeFilterCreatureCheckboxes() {
+  console.log("Make Filter Creature Buttons");
+  const creatures = await getCreaturesFromPosts();
+  for (let i = 0; i < creatures.length; i++) {
+    const creatureFilterBtnHtml = /* html */ `
+      <input
+        type="checkbox"
+        name="creature"
+        id="${creatures[i].toLowerCase()}"
+        value="${creatures[i]}"
+      />
+      <label for="${creatures[i].toLowerCase()}">${creatures[i]}</label>
+      <br/>
+    `;
+    document
+      .querySelector("#filter-creature-form")
+      .insertAdjacentHTML("beforeend", creatureFilterBtnHtml);
+  }
+  async function getCreaturesFromPosts() {
+    console.log("Get creatures from posts");
+    const posts = await getPosts();
+    let differntCreatures = [];
+    for (let i = 0; i < posts.length; i++) {
+      if (!differntCreatures.includes(posts[i].creature)) {
+        differntCreatures.push(posts[i].creature);
+      }
+    }
+    return differntCreatures;
+  }
+
+  filterPostsByCheckedCreatures();
+}
+//Gets one of each different type of creature and puts it in a new array
+
+//Filters post by creature
+async function filterPostsByCheckedCreatures() {
+  console.log("Filtered posts by creature");
+  const posts = await getPosts();
+  const filterForm = document.querySelector("#filter-creature-form");
+  //Add event to form when it changes
+  filterForm.addEventListener("change", () => {
+    const selected = []; //Array with the checkboxes that are checked
+    const inputs = filterForm.querySelectorAll("input[type='checkbox']");
+    const filteredPosts = []; //Array with the posts after being filterd
+    //Makes an array with the checked boxes
+    for (const input of inputs) {
+      if (input.checked) {
+        selected.push(input.value);
+      }
+    }
+    //Fills the filteredPosts with posts that matches the checked boxes
+    for (let i = 0; i < posts.length; i++) {
+      if (selected.includes(posts[i].creature)) {
+        filteredPosts.push(posts[i]);
+      }
+    }
+    //Checks filteredPosts to make sure it only shows if it is not empty
+    if (!filteredPosts.length == 0) {
+      showPosts(filteredPosts);
+    } else {
+      updatePostsGrid(); //When theres no checked checkboxes show all posts
+    }
+  });
+}

@@ -184,6 +184,14 @@ function closeCreationDialog() {
 /* ------------------UPDATE FORM SECTION----------------- */
 function updateBtnClicked(post) {
   console.log("Update button clicked");
+
+  //Removing event listener
+  document
+    .querySelector(".post-grid .post-item:last-child #update_btn")
+    .removeEventListener("click", () => {
+      updateBtnClicked(post);
+    });
+
   const updateForm = document.querySelector("#update-form");
   //Auto fill current values in post into input
   updateForm.name.value = post.name;
@@ -206,9 +214,15 @@ function updateBtnClicked(post) {
   //Event for submitting update form
   document.querySelector("#update-form").addEventListener("submit", updatePost);
 
+  //Updating current post when when the update button in the dialog
   async function updatePost(event) {
     console.log("Update post");
     event.preventDefault();
+
+    //Removing event listener
+    document
+      .querySelector("#update-form")
+      .removeEventListener("submit", updatePost);
 
     const postToUpdate = {
       armor: updateForm.armor.value,

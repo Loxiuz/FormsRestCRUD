@@ -386,6 +386,7 @@ function notify(name, message) {
   footer.classList.add("slideUp");
   footer.addEventListener("animationend", () => {
     footer.classList.remove("slideUp");
+    footer.classList.remove("hidden");
     footer.classList.add("slideDown");
     footer.addEventListener("animationend", () => {
       footer.classList.remove("slideDown");

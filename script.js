@@ -32,6 +32,8 @@ async function start() {
     .querySelector("#close-creation-button")
     .addEventListener("click", closeCreationDialog);
 
+  document.querySelector("#find-post").addEventListener("input", searchPost);
+
   makeFilterCreatureCheckboxes(); //Create the checkboxes for the filter
 }
 
@@ -330,7 +332,8 @@ async function filterPostsByCheckedCreatures() {
   filterForm.addEventListener("change", () => {
     const selected = []; //Array with the checkboxes that are checked
     const inputs = filterForm.querySelectorAll("input[type='checkbox']");
-    const filteredPosts = []; //Array with the posts after being filterd
+    //Array with the posts after being filterd
+    const filteredPosts = [];
     //Makes an array with the checked boxes
     for (const input of inputs) {
       if (input.checked) {
@@ -350,4 +353,23 @@ async function filterPostsByCheckedCreatures() {
       updatePostsGrid(); //When theres no checked checkboxes show all posts
     }
   });
+}
+
+// SEARCH POST FUNCTION
+
+async function searchPost() {
+  const searchInput = document.querySelector("#find-post").value.toLowerCase();
+  const posts = await getPosts();
+  const filteredPosts = [];
+  for (let i = 0; i < posts.length; i++) {
+    if (posts[i].name.toLowerCase().includes(searchInput)) {
+      filteredPosts.push(posts[i]);
+    }
+  }
+
+  if (searchInput.length !== 0) {
+    showPosts(filteredPosts);
+  } else {
+    updatePostsGrid();
+  }
 }

@@ -38,6 +38,17 @@ dialog {
   width: 20em;
 }
 
+#menu-section input {
+  border-radius: 0px;
+  border-style: none;
+  height: 2em;
+  width: 20em;
+}
+
+#menu-section input::placeholder {
+  text-align: center;
+}
+
 /* MAIN GRID CONTAINER */
 .grid-container {
   display: grid;

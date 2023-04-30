@@ -129,7 +129,7 @@ function showPosts(posts) {
       });
 
     document
-      .querySelector(".post-grid .post-item:last-child")
+      .querySelector(".post-grid .post-item:last-child img")
       .addEventListener("click", postClicked);
     // delete btn
     document

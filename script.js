@@ -381,6 +381,12 @@ function notify(name, message) {
     <h3>${name} has been ${message}!</h3>
   `;
   footer.insertAdjacentHTML("beforeend", messageHtml);
+  //Different background color on footer depending on the message
+  if (message === "updated") {
+    footer.style.backgroundColor = "green";
+  } else if (message === "deleted") {
+    footer.style.backgroundColor = "red";
+  }
   //Animation for footer
   footer.classList.remove("hidden");
   footer.classList.add("slideUp");

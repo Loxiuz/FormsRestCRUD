@@ -88,8 +88,9 @@ body {
 }
 .post-item {
   display: grid;
+  position: relative;
   background-image: url("pictures/vintage-grunge-paper-background.jpg");
-  background-size: 130%;
+  background-size: cover;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.273);
   padding: 10px;
   border: 1px solid rgb(159, 81, 3);
@@ -98,7 +99,9 @@ body {
   padding: 10px;
   text-align: left;
   height: 100%;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  max-width: fit-content;
 }
 
 .post-item img {

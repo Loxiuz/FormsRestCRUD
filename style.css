@@ -143,9 +143,10 @@ body {
 
 /* ------- SORT-BY BOX! ------- */
 label {
-  margin-right: 0.5rem;
+  margin-right: 5px;
 }
 
 select {
-  padding: 0.5rem;
+  padding: 5px;
+  margin-top: 10px;
 }

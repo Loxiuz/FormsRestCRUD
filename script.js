@@ -25,10 +25,8 @@ async function start() {
     .addEventListener("click", closeDeleteDialog);
 
 }
-// showPosts(posts);
 
 //------------------CREATE FORM SECTION-----------------
-
 //Create button click (show create dialog with form)
 function createBtnClick() {
   console.log("Create button clicked!");
@@ -209,8 +207,10 @@ function prepareData(dataObject) {
   for (const key in dataObject) {
     const data = dataObject[key];
     data.id = key;
-    // Converts hitpoints into numbers
+    // Converts the value into numbers
     data.hitpoints= Number(data.hitpoints);
+    data.level = Number(data.level);
+    data.armor = Number(data.armor);
     
     dataArray.push(data);                                                                 
   }

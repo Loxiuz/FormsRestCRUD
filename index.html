@@ -9,11 +9,15 @@
   </head>
   <body>
     <div id="screen">
-<!-- HEADER -->
-    <div id="menu-section">
-      <h1 class="menu-title">The Monster Collection</h1>
-      <button id="create_btn">Create new post</button>
-
+      <!-- HEADER -->
+      <div id="menu-section">
+        <h1 class="menu-title">The Monster Collection</h1>
+        <button id="create_btn">Create new post</button>
+        <hr />
+        <form id="filter-creature-form">
+          <h3>Filter Monsters By Creature:</h3>
+        </form>
+  
     <!-- SORT-BY DROPDOWN! -->
       <label for="sort-by">Sort By:</label>
       <select id="sort-by">
@@ -24,18 +28,18 @@
         <option value="hitpoints">Hitpoints</option>
       </select>
     </div>
-    
-<!-- POSTS GRID -->
-    <div id="post-section">
-    <section class="grid-container">
-      <div id="posts" class="post-grid"></div>
-    </section>
-    </div>
 
+      <!-- POSTS GRID -->
+      <div id="post-section">
+        <section class="grid-container">
+          <div id="posts" class="post-grid"></div>
+        </section>
+      </div>
     </div>
-<!-- CREATE FORM SECTION -->
+    <!-- CREATE FORM SECTION -->
     <dialog id="creation-dialog">
       <form id="creation-form">
+        <input type="button" id="close-creation-button" value="✖" />
         <h1 style="text-align: center">New monster post.</h1>
         <label for="name">Name:</label>
         <input type="text" name="name" id="creation-input-name" required />
@@ -66,11 +70,11 @@
         <hr />
         <label for="stats">Stats:</label>
         <div id="stats-container" name="stats">
-          <label for="stats_con">Constitution:</label>
+          <label for="stats_str">Strength:</label>
           <input
             type="number"
-            name="stats_con"
-            id="creation-input-stats-con"
+            name="stats_str"
+            id="creation-input-stats-str"
             required
           />
           <label for="stats_dex">Dexterity:</label>
@@ -80,18 +84,18 @@
             id="creation-input-stats-dex"
             required
           />
+          <label for="stats_con">Constitution:</label>
+          <input
+            type="number"
+            name="stats_con"
+            id="creation-input-stats-con"
+            required
+          />
           <label for="stats_int">Intellect:</label>
           <input
             type="number"
             name="stats_int"
             id="creation-input-stats-int"
-            required
-          />
-          <label for="stats_str">Strength:</label>
-          <input
-            type="number"
-            name="stats_str"
-            id="creation-input-stats-str"
             required
           />
         </div>
@@ -105,12 +109,14 @@
         <label for="image">Image URL:</label>
         <input type="url" name="image" id="creation-input-image" required />
         <hr />
-        <input type="reset" value="Clear form" id="create-clear-btn" />
-        <input type="submit" value="Submit monster" id="create-submit-btn" />
+        <div class="double-buttons">
+          <input type="reset" value="Clear form" id="create-clear-btn" />
+          <input type="submit" value="Submit monster" id="create-submit-btn" />
+        </div>
       </form>
     </dialog>
-    
-<!-- UPDATE FORM SECTION -->
+
+    <!-- UPDATE FORM SECTION -->
     <dialog id="update-dialog">
       <form id="update-form">
         <h1 style="text-align: center">Update monster post.</h1>
@@ -186,8 +192,8 @@
         <input type="submit" value="Update monster" id="update-submit-btn" />
       </form>
     </dialog>
- 
-<!-- DELETE FORM SECTION -->
+
+    <!-- DELETE FORM SECTION -->
     <dialog id="dialog-delete-post">
       <h2>Do you want to delete post?</h2>
       <p id="dialog-delete-post-title">Title of post</p>
@@ -196,6 +202,14 @@
         <button>Yes</button>
       </form>
     </dialog>
+
+    <!-- DETAILS DIALOG SECTION -->
+    <dialog id="details-view">
+      <button id="details-close-btn">✖</button>
+      <section id="details-section"></section>
+    </dialog>
+
+    <footer><h3></h3></footer>
 
     <script src="script.js"></script>
   </body>

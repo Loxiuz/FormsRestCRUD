@@ -32,7 +32,10 @@ async function start() {
     .querySelector("#close-creation-button")
     .addEventListener("click", closeCreationDialog);
 
+  //eventlistener for search field input
   document.querySelector("#find-post").addEventListener("input", searchPost);
+
+  document.querySelector("footer").classList.add("hidden"); //Hide the footer for notifications
 
   makeFilterCreatureCheckboxes(); //Create the checkboxes for the filter
 }
@@ -42,7 +45,6 @@ function closeDetailsDialog() {
 }
 
 //------------------CREATE FORM SECTION-----------------
-
 //Create button click (show create dialog with form)
 function createBtnClick() {
   console.log("Create button clicked!");
@@ -105,7 +107,7 @@ function showPosts(posts) {
   //Shows data in html
   function showPost(post) {
     const htmlPostData = /*html*/ `
-           <article class="post-item">
+           <article class="post-item" id="post_${post.id}">
               <div id="post_name">${post.name}</div>
               <img src=${post.image}></>
               <div>Level: ${post.level}</div>
@@ -186,6 +188,14 @@ function closeCreationDialog() {
 /* ------------------UPDATE FORM SECTION----------------- */
 function updateBtnClicked(post) {
   console.log("Update button clicked");
+
+  //Removing event listener
+  document
+    .querySelector(".post-grid .post-item:last-child #update_btn")
+    .removeEventListener("click", () => {
+      updateBtnClicked(post);
+    });
+
   const updateForm = document.querySelector("#update-form");
   //Auto fill current values in post into input
   updateForm.name.value = post.name;
@@ -208,9 +218,15 @@ function updateBtnClicked(post) {
   //Event for submitting update form
   document.querySelector("#update-form").addEventListener("submit", updatePost);
 
+  //Updating current post when when the update button in the dialog
   async function updatePost(event) {
     console.log("Update post");
     event.preventDefault();
+
+    //Removing event listener
+    document
+      .querySelector("#update-form")
+      .removeEventListener("submit", updatePost);
 
     const postToUpdate = {
       armor: updateForm.armor.value,
@@ -230,6 +246,7 @@ function updateBtnClicked(post) {
     //Send the post to update with post id
     await updatePostSend(post.id, postToUpdate);
     dialog.close();
+    notify(post.name, "updated");
   }
 }
 //Update content of a post by id
@@ -254,7 +271,12 @@ function prepareData(dataObject) {
   for (const key in dataObject) {
     const data = dataObject[key];
     data.id = key;
-    dataArray.push(data);
+    // Converts the value into numbers
+    data.hitpoints= Number(data.hitpoints);
+    data.level = Number(data.level);
+    data.armor = Number(data.armor);
+    
+    dataArray.push(data);                                                                 
   }
   return dataArray;
 }
@@ -264,11 +286,10 @@ async function updatePostsGrid() {
   const posts = await getPosts();
   showPosts(posts);
 }
-
+/* ------------- DELETE FORM SECTION --------- */
 function deletePostClicked(event) {
   const id = event.target.getAttribute("data-id"); // event.target is the delete form
   deletePost(id); // call deletePost with id
-  console.log("im here");
 }
 
 async function deletePost(id) {
@@ -279,6 +300,10 @@ async function deletePost(id) {
     console.log("post deleted");
     updatePostsGrid();
     document.querySelector("#dialog-delete-post").close();
+    notify(
+      document.querySelector(`#post_${id} #post_name`).innerHTML,
+      "deleted"
+    );
   }
 }
 
@@ -286,6 +311,28 @@ function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
 }
 
+/* --------- SORT-BY SECTION ------------ */
+const sortByDropdown = document.querySelector("#sort-by");
+
+sortByDropdown.addEventListener("change", async () => {
+  const selectedOption = sortByDropdown.value;
+  const posts = await getPosts();
+  const sortedPosts = sortPosts(selectedOption, posts);
+  showPosts(sortedPosts);
+});
+
+// takes values from Sort-by dropdown HTML and compare the posts by selected values
+function sortPosts(selectedOption, posts) {
+  return posts.sort((a, b) => {
+    if (a[selectedOption] > b[selectedOption]) {
+      return 1;
+    }
+    if (a[selectedOption] < b[selectedOption]) {
+      return -1;
+    }
+    return 0;
+  });
+}
 /* ------------- Filter Buttons ------------- */
 
 //Makes the buttons for the creature filter in html
@@ -355,8 +402,8 @@ async function filterPostsByCheckedCreatures() {
   });
 }
 
-// SEARCH POST FUNCTION
 
+// SEARCH POST FUNCTION
 async function searchPost() {
   const searchInput = document.querySelector("#find-post").value.toLowerCase();
   //filter posts based on search input, without being case sensitive.
@@ -369,3 +416,35 @@ async function searchPost() {
     updatePostsGrid();
   }
 }
+
+
+//Notify user of a message when updating and deleting a post
+function notify(name, message) {
+  console.log("notification");
+  const footer = document.querySelector("footer");
+  footer.innerHTML = ""; //Clear html to avoid duplication
+  //Add html to footer
+  const messageHtml = /* html */ `
+    <h3>${name} has been ${message}!</h3>
+  `;
+  footer.insertAdjacentHTML("beforeend", messageHtml);
+  //Different background color on footer depending on the message
+  if (message === "updated") {
+    footer.style.backgroundColor = "green";
+  } else if (message === "deleted") {
+    footer.style.backgroundColor = "red";
+  }
+  //Animation for footer
+  footer.classList.remove("hidden");
+  footer.classList.add("slideUp");
+  footer.addEventListener("animationend", () => {
+    footer.classList.remove("slideUp");
+    footer.classList.remove("hidden");
+    footer.classList.add("slideDown");
+    footer.addEventListener("animationend", () => {
+      footer.classList.remove("slideDown");
+      footer.classList.add("hidden");
+    });
+  });
+  }
+

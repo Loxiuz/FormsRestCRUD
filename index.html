@@ -23,7 +23,17 @@
         <form id="filter-creature-form">
           <h3>Filter Monsters By Creature:</h3>
         </form>
-      </div>
+  
+    <!-- SORT-BY DROPDOWN! -->
+      <label for="sort-by">Sort By:</label>
+      <select id="sort-by">
+        <option value="">Select option</option>
+        <option value="name">Name</option>
+        <option value="level">Level</option>
+        <option value="armor">Armor</option>
+        <option value="hitpoints">Hitpoints</option>
+      </select>
+    </div>
 
       <!-- POSTS GRID -->
       <div id="post-section">
@@ -204,6 +214,10 @@
       <button id="details-close-btn">✖</button>
       <section id="details-section"></section>
     </dialog>
+
+    <footer><h3></h3></footer>
+
     <script src="script.js"></script>
   </body>
 </html>
+

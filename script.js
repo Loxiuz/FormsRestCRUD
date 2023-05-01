@@ -23,7 +23,9 @@ async function start() {
   document
     .querySelector("#btn-cancel")
     .addEventListener("click", closeDeleteDialog);
+
 }
+// showPosts(posts);
 
 //------------------CREATE FORM SECTION-----------------
 
@@ -75,6 +77,7 @@ async function createPostSend(newPost) {
 
 //Gets posts from firebase
 async function getPosts() {
+  console.log("Getpost gotten")
   const response = await fetch(`${endpoint}/monsters.json`);
   const data = await response.json();
   return prepareData(data);
@@ -206,7 +209,10 @@ function prepareData(dataObject) {
   for (const key in dataObject) {
     const data = dataObject[key];
     data.id = key;
-    dataArray.push(data);
+    // Converts hitpoints into numbers
+    data.hitpoints= Number(data.hitpoints);
+    
+    dataArray.push(data);                                                                 
   }
   return dataArray;
 }
@@ -216,7 +222,7 @@ async function updatePostsGrid() {
   const posts = await getPosts();
   showPosts(posts);
 }
-
+/* ------------- DELETE FORM SECTION --------- */
 function deletePostClicked(event) {
   const id = event.target.getAttribute("data-id"); // event.target is the delete form
   deletePost(id); // call deletePost with id
@@ -238,4 +244,25 @@ function closeDeleteDialog() {
   document.querySelector("#dialog-delete-post").close();
 }
 
-// TEST OM MERGE VIRKER
+/* --------- SORT-BY SECTION ------------ */
+const sortByDropdown = document.querySelector("#sort-by");
+
+sortByDropdown.addEventListener("change", async () => {
+  const selectedOption = sortByDropdown.value;
+  const posts = await getPosts();
+  const sortedPosts = sortPosts(selectedOption, posts);
+  showPosts(sortedPosts);
+});
+
+// takes values from Sort-by dropdown HTML and compare the posts by selected values
+function sortPosts(selectedOption, posts) {
+  return posts.sort((a, b) => {
+    if (a[selectedOption] > b[selectedOption]) {
+      return 1;
+    }
+    if (a[selectedOption] < b[selectedOption]) {
+      return -1;
+    }
+    return 0;
+  });
+}

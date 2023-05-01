@@ -140,3 +140,12 @@ body {
   border: 1px solid black;
 }
 
+
+/* ------- SORT-BY BOX! ------- */
+label {
+  margin-right: 0.5rem;
+}
+
+select {
+  padding: 0.5rem;
+}

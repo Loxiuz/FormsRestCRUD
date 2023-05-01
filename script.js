@@ -32,6 +32,9 @@ async function start() {
     .querySelector("#close-creation-button")
     .addEventListener("click", closeCreationDialog);
 
+  //eventlistener for search field input
+  document.querySelector("#find-post").addEventListener("input", searchPost);
+
   document.querySelector("footer").classList.add("hidden"); //Hide the footer for notifications
 
   makeFilterCreatureCheckboxes(); //Create the checkboxes for the filter
@@ -376,7 +379,8 @@ async function filterPostsByCheckedCreatures() {
   filterForm.addEventListener("change", () => {
     const selected = []; //Array with the checkboxes that are checked
     const inputs = filterForm.querySelectorAll("input[type='checkbox']");
-    const filteredPosts = []; //Array with the posts after being filterd
+    //Array with the posts after being filterd
+    const filteredPosts = [];
     //Makes an array with the checked boxes
     for (const input of inputs) {
       if (input.checked) {
@@ -397,6 +401,23 @@ async function filterPostsByCheckedCreatures() {
     }
   });
 }
+
+
+// SEARCH POST FUNCTION
+async function searchPost() {
+  const searchInput = document.querySelector("#find-post").value.toLowerCase();
+  //filter posts based on search input, without being case sensitive.
+  const filteredPosts = (await getPosts()).filter(post =>
+    post.name.toLowerCase().includes(searchInput)
+  );
+  if (searchInput.length !== 0) {
+    showPosts(filteredPosts);
+  } else {
+    updatePostsGrid();
+  }
+}
+
+
 //Notify user of a message when updating and deleting a post
 function notify(name, message) {
   console.log("notification");
@@ -425,4 +446,5 @@ function notify(name, message) {
       footer.classList.add("hidden");
     });
   });
-}
+  }
+

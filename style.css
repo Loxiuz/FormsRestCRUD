@@ -3,7 +3,7 @@ body {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("pictures/background-image.jpg");
   background-position: center top;
-  background-size: fill;
+  background-size: cover;
 }
 
 dialog {
@@ -189,7 +189,7 @@ footer {
   width: 200px;
   height: 300px;
   object-fit: cover;
-  object-position: center left;
+  object-position: center;
 }
 
 .post-item:hover {
@@ -232,6 +232,7 @@ footer {
   margin: auto;
   background-image: url("pictures/vintage-grunge-paper-background.jpg");
   background-size: cover;
+  box-shadow: 0px 0px 40px black;
 }
 
 #details-view img {

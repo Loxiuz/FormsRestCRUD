@@ -53,8 +53,6 @@ footer {
 #menu-section input {
   border-radius: 0px;
   border-style: none;
-  height: 2em;
-  width: 20em;
 }
 
 #menu-section input::placeholder {

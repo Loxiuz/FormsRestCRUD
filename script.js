@@ -272,11 +272,11 @@ function prepareData(dataObject) {
     const data = dataObject[key];
     data.id = key;
     // Converts the value into numbers
-    data.hitpoints= Number(data.hitpoints);
+    data.hitpoints = Number(data.hitpoints);
     data.level = Number(data.level);
     data.armor = Number(data.armor);
-    
-    dataArray.push(data);                                                                 
+
+    dataArray.push(data);
   }
   return dataArray;
 }
@@ -354,6 +354,7 @@ async function makeFilterCreatureCheckboxes() {
       .querySelector("#filter-creature-form")
       .insertAdjacentHTML("beforeend", creatureFilterBtnHtml);
   }
+  //Gets one of each different type of creature and puts it in a new array
   async function getCreaturesFromPosts() {
     console.log("Get creatures from posts");
     const posts = await getPosts();
@@ -368,7 +369,6 @@ async function makeFilterCreatureCheckboxes() {
 
   filterPostsByCheckedCreatures();
 }
-//Gets one of each different type of creature and puts it in a new array
 
 //Filters post by creature
 async function filterPostsByCheckedCreatures() {
@@ -402,7 +402,6 @@ async function filterPostsByCheckedCreatures() {
   });
 }
 
-
 // SEARCH POST FUNCTION
 async function searchPost() {
   const searchInput = document.querySelector("#find-post").value.toLowerCase();
@@ -416,7 +415,6 @@ async function searchPost() {
     updatePostsGrid();
   }
 }
-
 
 //Notify user of a message when updating and deleting a post
 function notify(name, message) {
@@ -446,5 +444,4 @@ function notify(name, message) {
       footer.classList.add("hidden");
     });
   });
-  }
-
+}

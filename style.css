@@ -189,7 +189,7 @@ footer {
   width: 200px;
   height: 300px;
   object-fit: cover;
-  object-position: center left;
+  object-position: center;
 }
 
 .post-item:hover {

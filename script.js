@@ -406,7 +406,7 @@ async function filterPostsByCheckedCreatures() {
 async function searchPost() {
   const searchInput = document.querySelector("#find-post").value.toLowerCase();
   //filter posts based on search input, without being case sensitive.
-  const filteredPosts = (await getPosts()).filter(post =>
+  const filteredPosts = (await getPosts()).filter((post) =>
     post.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
